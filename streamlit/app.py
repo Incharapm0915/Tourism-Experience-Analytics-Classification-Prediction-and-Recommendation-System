@@ -409,10 +409,7 @@ def show_overview(master_df, models):
     
     with col3:
         if 'recommendation' in models:
-            if models['recommendation'].get('available', False):
-                st.success("✅ Recommendation System\nFully Available")
-            else:
-                st.info("ℹ️ Recommendation System\nLimited Functionality")
+            st.success(f"✅ Recommendation System\nAvailable")
         else:
             st.error("❌ Recommendation System\nNot Available")
     
