@@ -408,8 +408,10 @@ def show_overview(master_df, models):
             st.error("❌ Visit Mode Classifier\nNot Available")
     
     with col3:
-        if 'recommendation' in models:
-            st.success(f"✅ Recommendation System\nAvailable")
+        if 'recommendation' in models and models['recommendation']['available']:
+            st.success(f"✅ Recommendation System\nPopularity-Based Available")
+        elif 'recommendation' in models:
+            st.info("ℹ️ Recommendation System\nLimited Functionality")
         else:
             st.error("❌ Recommendation System\nNot Available")
     
