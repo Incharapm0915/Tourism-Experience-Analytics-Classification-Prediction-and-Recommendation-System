@@ -622,19 +622,6 @@ def main():
     elif page_key == "performance":
         show_performance(models)
 
-# --- Placeholder implementations for missing functions ---
-def show_recommendations_page(master_df, models):
-    """Recommendation system page (placeholder)"""
-    import streamlit as st
-    st.markdown('<h2 class="sub-header">🧭 Recommendations</h2>', unsafe_allow_html=True)
-    st.info("This page will display personalized recommendations. (Implementation needed)")
-
-def show_performance(models):
-    """Model performance metrics page (placeholder)"""
-    import streamlit as st
-    st.markdown('<h2 class="sub-header">📈 Model Performance</h2>', unsafe_allow_html=True)
-    st.info("This page will display model performance metrics and evaluation results. (Implementation needed)")
-
 def show_overview(master_df, models):
     """Overview page with key statistics"""
     st.markdown('<h2 class="sub-header">📊 Project Overview</h2>', unsafe_allow_html=True)
