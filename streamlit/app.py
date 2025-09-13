@@ -263,41 +263,43 @@ def predict_visit_mode(models, user_features):
         return None, f"Prediction error: {str(e)}", None
 
 def get_recommendations(models, user_id, n_recommendations=10):
-    """Get recommendations using available models"""
+    """Get recommendations using popularity-based approach"""
     if 'recommendation' not in models:
         return [], "Recommendation system not available"
     
     try:
         rec_models = models['recommendation']
         
-        # Check if we have any recommendation models
-        available_models = []
-        for model_name in ['hybrid', 'user_cf', 'item_cf', 'content_cf', 'svd']:
-            if model_name in rec_models:
-                available_models.append(model_name)
-        
-        if not available_models:
-            return [], "No recommendation models available"
-        
-        # Use the first available model
-        model_name = available_models[0]
-        
-        # Generate simple recommendations based on popularity if models fail
+        # Use popularity-based recommendations if training matrix is available
         if 'training_matrix' in rec_models:
             training_matrix = rec_models['training_matrix']
             
-            # Get most popular items as fallback
-            item_popularity = (training_matrix > 0).sum().sort_values(ascending=False)
-            recommendations = item_popularity.head(n_recommendations).index.tolist()
-            
-            return recommendations, f"Using popularity-based recommendations (fallback)"
+            # Check if user exists in training matrix
+            if user_id in training_matrix.index:
+                # Get items user hasn't rated
+                user_ratings = training_matrix.loc[user_id]
+                unrated_items = user_ratings[user_ratings == 0].index
+                
+                # Get popularity scores for unrated items
+                item_popularity = (training_matrix > 0).sum()
+                unrated_popularity = item_popularity[unrated_items].sort_values(ascending=False)
+                
+                recommendations = unrated_popularity.head(n_recommendations).index.tolist()
+                return recommendations, "Using popularity-based recommendations for existing user"
+            else:
+                # New user - recommend most popular items overall
+                item_popularity = (training_matrix > 0).sum().sort_values(ascending=False)
+                recommendations = item_popularity.head(n_recommendations).index.tolist()
+                return recommendations, "Using global popularity recommendations for new user"
         else:
-            # Ultimate fallback - return some sample attraction IDs
-            sample_attractions = list(range(1, n_recommendations + 1))
-            return sample_attractions, "Using sample recommendations (no training data available)"
+            # No training matrix available - return sample recommendations
+            sample_attractions = list(range(1, min(n_recommendations + 1, 100)))
+            return sample_attractions, "Using sample recommendations (limited data available)"
             
     except Exception as e:
-        return [], f"Recommendation error: {str(e)}"
+        # Ultimate fallback
+        sample_attractions = list(range(1, n_recommendations + 1))
+        return sample_attractions, f"Using fallback recommendations: {str(e)}"
 
 # =============================================================================
 # MAIN APPLICATION
