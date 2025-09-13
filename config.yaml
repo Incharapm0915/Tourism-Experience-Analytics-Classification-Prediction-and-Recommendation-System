@@ -1,0 +1,50 @@
+# Project Configuration
+project:
+  name: "Tourism Experience Analytics"
+  version: "1.0.0"
+  
+# Data Configuration
+data:
+  raw_data_path: "data/raw/"
+  processed_data_path: "data/processed/"
+  model_data_path: "data/model_data/"
+  
+# Model Configuration
+models:
+  save_path: "models/"
+  random_state: 42
+  test_size: 0.2
+  cv_folds: 5
+  
+# Regression Models
+regression:
+  models_to_try:
+    - "RandomForest"
+    - "XGBoost"
+    - "LightGBM"
+    - "CatBoost"
+  target_column: "Rating"
+  
+# Classification Models  
+classification:
+  models_to_try:
+    - "RandomForest"
+    - "XGBoost" 
+    - "LightGBM"
+  target_column: "VisitMode"
+  
+# Recommendation System
+recommendation:
+  n_recommendations: 10
+  min_interactions: 5
+  algorithms:
+    - "collaborative_filtering"
+    - "content_based"
+    - "hybrid"
+    
+# Streamlit Configuration
+streamlit:
+  page_title: "Tourism Analytics Dashboard"
+  page_icon: "🏛️"
+  layout: "wide"
+  sidebar_state: "expanded"

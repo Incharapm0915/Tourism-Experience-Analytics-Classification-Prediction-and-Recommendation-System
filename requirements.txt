@@ -1,0 +1,55 @@
+# Data Processing & Analysis
+pandas
+numpy
+scipy
+
+# Machine Learning
+scikit-learn
+xgboost
+lightgbm
+catboost
+
+# Deep Learning (Optional for advanced recommendation)
+tensorflow
+
+# Data Visualization
+matplotlib
+seaborn
+plotly
+folium
+
+# Streamlit & Web Components
+streamlit
+streamlit-folium
+streamlit-option-menu
+streamlit-plotly-events
+
+# Data Loading & File Handling
+openpyxl
+xlrd
+
+# Model Persistence & Utilities
+joblib
+
+# Recommendation Systems
+implicit
+
+# Statistical Analysis
+statsmodels
+
+# Progress Bars & Utilities
+tqdm
+
+# Testing
+pytest
+pytest-cov
+
+# Code Quality
+black
+flake8
+isort
+
+# Jupyter
+jupyter
+ipykernel
+nbconvert
