@@ -1,0 +1,23 @@
+{
+  "processing_date": "2025-09-12 19:22:37",
+  "original_shape": [
+    14185,
+    7
+  ],
+  "final_shape": [
+    14185,
+    54
+  ],
+  "total_features": 48,
+  "categorical_columns": [
+    "AttractionTypeId",
+    "Country",
+    "Region",
+    "Continent",
+    "AttractionType",
+    "VisitMode_visit_modes",
+    "Season",
+    "MonthCategory"
+  ],
+  "data_quality_score": "Good"
+}
